@@ -67,7 +67,7 @@ def command_handler(command):
 			latitude = command[2]
 			city = 'no'
 			country_code = 'no'
-			unit = command[4]
+			unit = command[3]
 			response = weather(city, country_code, longitude, latitude, unit)
 
 		elif str.isalpha(command[1]):
@@ -75,7 +75,7 @@ def command_handler(command):
 			country_code = command[2]
 			longitude = 'no'
 			latitude = 'no'
-			unit = command[4]
+			unit = command[3]
 			response = weather(city, country_code, longitude, latitude, unit)
 
 		else:
