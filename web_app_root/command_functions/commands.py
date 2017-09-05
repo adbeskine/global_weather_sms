@@ -1,7 +1,7 @@
 import requests
 
 
-def command_handler(command):
+def command_handler(command, number):
 
 	####################
 	###HELPER METHODS###
@@ -60,6 +60,15 @@ def command_handler(command):
 			return response
 
 	
+	if command[len(command)-2] == 'SUBSCRIBE':
+		message = ''
+		for word in command[0:len(command)-2]:
+			message = message + word + ' '
+		record = commands(message, command[len(command)-1], number)
+		db.session.add(record)
+		db.session.commit()
+
+
 	if command[0] == 'WEATHER':
 
 		try:
@@ -81,6 +90,6 @@ def command_handler(command):
 				response = weather(city, country_code, longitude, latitude, unit)
 
 		except Exception:
-			response = 'incorrect format, please check your command text and try again. It should be WEATHER CITY/LONGITUTDE COUNTRYCODE/LATITUDE'
+			response = 'incorrect format, please check your command text and try again. It should be WEATHER CITY/LONGITUTDE COUNTRYCODE/LATITUDE C/F'
 		
 		return response
