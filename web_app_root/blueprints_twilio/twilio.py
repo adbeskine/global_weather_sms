@@ -12,7 +12,7 @@ def twilio_sms():
 	command = message.split()
 	response = command_handler(command)
 	resp = MessagingResponse()
-	response = response + 'you are receiving this alert through the plivo api'
+	response = response + '   - you are receiving this alert through the twilio api by Alexander Beskine'
 	resp.message(str(response)) #generated in commands #TODO can I remove the str() here?
 	return str(resp)
 
