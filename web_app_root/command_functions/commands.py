@@ -8,10 +8,10 @@ def command_handler(command):
 	####################
 	
 	def KtoC(temp):
-		return str((int(temp)-273.15))
+		return str((int(temp)-273))
 	
 	def KtoF(temp):
-		return str((1.8*(int(temp)-273.15)+32))
+		return str((1.8*(int(temp)-273)+32))
 
 ######################################################################
 
@@ -62,22 +62,25 @@ def command_handler(command):
 	
 	if command[0] == 'WEATHER':
 
-		if any(char.isdigit() for char in command[1]) and any(char.isdigit() for char in command[2]):
-			longitude = command[1]
-			latitude = command[2]
-			city = 'no'
-			country_code = 'no'
-			unit = command[3]
-			response = weather(city, country_code, longitude, latitude, unit)
+		try:
 
-		elif str.isalpha(command[1]):
-			city = command[1]
-			country_code = command[2]
-			longitude = 'no'
-			latitude = 'no'
-			unit = command[3]
-			response = weather(city, country_code, longitude, latitude, unit)
+			if any(char.isdigit() for char in command[1]) and any(char.isdigit() for char in command[2]):
+				longitude = command[1]
+				latitude = command[2]
+				city = 'no'
+				country_code = 'no'
+				unit = command[3]
+				response = weather(city, country_code, longitude, latitude, unit)
+	
+			elif str.isalpha(command[1]):
+				city = command[1]
+				country_code = command[2]
+				longitude = 'no'
+				latitude = 'no'
+				unit = command[3]
+				response = weather(city, country_code, longitude, latitude, unit)
 
-		else:
+		except Exception:
 			response = 'incorrect format, please check your command text and try again. It should be WEATHER CITY/LONGITUTDE COUNTRYCODE/LATITUDE'
+		
 		return response
